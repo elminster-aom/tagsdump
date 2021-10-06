@@ -21,17 +21,20 @@ def is_config_valid(config: dict[str, str]) -> bool:
         ELASTIC_CLOUD_ID = my_elastic_cloud_id
         ELASTIC_CLOUD_USER = "elastic"
         ELASTIC_CLOUD_PSW = my_elastic_password
-        LOG_LEVEL = INFO
+        GITHUB_TOKEN = my_oath_token
+        LOG_LEVEL = WARNING
         """
 
     if (
         "ELASTIC_CLOUD_ID" in config
         and "ELASTIC_CLOUD_USER" in config
         and "ELASTIC_CLOUD_PSW" in config
+        and "GITHUB_TOKEN" in config
         and "LOG_LEVEL" in config
         and config["ELASTIC_CLOUD_ID"]
         and config["ELASTIC_CLOUD_USER"]
         and config["ELASTIC_CLOUD_PSW"]
+        and config["GITHUB_TOKEN"]
         and config["LOG_LEVEL"]
     ):
         return True
