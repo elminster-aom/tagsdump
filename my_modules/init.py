@@ -2,6 +2,7 @@ from elasticsearch import Elasticsearch
 import dotenv
 import logging
 
+
 log = logging.getLogger(__name__)
 
 
@@ -10,7 +11,7 @@ def _index_definition(session: Elasticsearch, index_name: str) -> None:
         "settings": {"number_of_shards": 1, "number_of_replicas": 1},
         "mappings": {
             "properties": {
-                "name": {"type": "text"},
+                "tag_name": {"type": "text"},
                 "commit_sha": {"type": "keyword"},
                 "repository": {"type": "text"},
             }

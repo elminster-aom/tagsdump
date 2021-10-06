@@ -4,10 +4,14 @@ from my_modules import init
 from my_modules import dump
 import dotenv
 import os
+import logging
 import sys
 
 
-def is_config_valid() -> bool:
+log = logging.getLogger(__name__)
+
+
+def is_config_valid(config: dict[str, str]) -> bool:
     """Validate that '.env' file is in the working path and have all parameters needed for connecting with GitHub and Elastic Cloud.
 
     Returns:
@@ -19,7 +23,6 @@ def is_config_valid() -> bool:
         ELASTIC_CLOUD_PSW = my_elastic_password
         LOG_LEVEL = INFO
         """
-    config = dotenv.dotenv_values()
 
     if (
         "ELASTIC_CLOUD_ID" in config
@@ -39,8 +42,9 @@ def is_config_valid() -> bool:
 
 if __name__ == "__main__":
     return_code = 1
+    config = dotenv.dotenv_values()
 
-    if not is_config_valid():
+    if not is_config_valid(config):
         return_code = os.EX_CONFIG
 
     elif len(sys.argv) != 3:
@@ -50,6 +54,7 @@ if __name__ == "__main__":
         return_code = os.EX_USAGE
 
     else:
+        logging.basicConfig(level=eval("logging." + config["LOG_LEVEL"]))
         if sys.argv[1] == "--init":
             init.elastic_index(sys.argv[2])
         else:
