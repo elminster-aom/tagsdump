@@ -49,7 +49,6 @@ async def get_github_repositories(
             await asyncio.sleep(0)
     except gidgethub.BadRequest as e:
         log.exception(f"Wrong input for repositories list. {e}, github_user={user!r}")
-        raise e
 
 
 async def get_github_tags(
@@ -80,4 +79,4 @@ async def get_github_tags(
         log.exception(
             f"Wrong input for tags list. {e}, github_repo={user!r} from github_user={user!r}"
         )
-        raise e
+

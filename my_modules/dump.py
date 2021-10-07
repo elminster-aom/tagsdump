@@ -47,7 +47,8 @@ async def async_main(main_data: dict[str, str]) -> None:
         try:
             # TODO: Check if it's worth to alidate elastic index (main_data['index']) was previously created (Mapping would be missing)
             elastic_session = await elastic.open_elastic_session()
-            await data_pipeline(github_session, elastic_session, main_data)
+            if elastic_session is not None:
+                await data_pipeline(github_session, elastic_session, main_data)
         finally:
             if elastic_session is not None:
                 await elastic_session.close()

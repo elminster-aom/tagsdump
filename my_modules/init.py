@@ -49,7 +49,6 @@ def elastic_index(index_name: str) -> None:
         log.exception(
             f"Cannot stablish connection with Elastic cloud_id={cloud_id!r} and user={cloud_user!r}"
         )
-        raise e
     else:
         if elastic_session.ping():
             log.debug(
